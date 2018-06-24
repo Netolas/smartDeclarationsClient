@@ -14,6 +14,7 @@
       </a>
     </div>
     <div v-for="patrimonial in patrimoniales" :key="patrimonial.id">
+      <p>HASH enviado a Smart Contract: {{patrimonial.hashPDF}}</p>
       <span>Inmuebles - Declaración: {{formatDate(patrimonial.createdAt)}}</span>
       <b-table :data="patrimonial.inmuhebles" :striped="true" :loading="loading">
 
@@ -165,7 +166,7 @@ export default {
         .dispatch("runPatrimonial")
         .then(patrimonial => {
           console.log(patrimonial);
-          var hash = patrimonial.hashPSD;
+          var hash = patrimonial.hashPDF;
           this.createContract({RFC:'XXXX00000XX1',pdf:hash})
           this.patrimoniales.push(patrimonial);
           this.loading = false;
